@@ -1,0 +1,72 @@
+<section class="home_3">
+  <div class="container-sm">
+    <h2>{{ heading_title }}</h2>
+    <div id="popular-slider{{ module_id }}" class="popular-slider">
+      {% for product in products %}
+        <div class="item product">
+          <div class="inner">
+            <div class="thumb">
+              <a href="{{ product.href }}">
+                <img src="{{ product.thumb }}"
+                     alt="{{ product.name }}"
+                     title="{{ product.name }}"
+                     class="img-responsive" />
+              </a>
+              {% if product.special %}
+                <div class="sale">
+                  {{ product.special_percant }}
+                </div>
+              {% endif %}
+            </div>
+            <a href="{{ product.href }}" tabindex="0">
+              <h6 class="title">{{ product.name }}
+              </h6>
+            </a>
+            <a href="{{ product.cathref }}" tabindex="0">
+              <p class="desc">
+                {{ product.cat }}
+              </p>
+            </a>
+            {% if product.price %}
+              <p class="price">
+                {% if product.special %}
+                  <span class="old">{{ product.price }}</span>
+                  <span class="new">{{ product.special }}</span>
+                {% else %}
+                  <span class="new">{{ product.price }}</span>
+                {% endif %}
+              </p>
+            {% endif %}
+          </div>
+        </div>
+      {% endfor %}
+
+    </div>
+  </div>
+  <div class="hr_block">
+    <img src="image/svg/logo_light.svg" alt="">
+  </div>
+</section>
+<script>
+  $(document).ready(function(){
+    $('#popular-slider{{ module_id }}').slick({
+      arrows: true,
+      dots: false,
+      slidesToShow: 4,
+      responsive: [
+        {
+            breakpoint: 1200,
+          settings: {
+            slidesToShow: 3
+          }
+        },
+        {
+            breakpoint: 600,
+          settings: {
+            slidesToShow: 2
+          }
+        }
+      ]
+    });
+  })
+</script>

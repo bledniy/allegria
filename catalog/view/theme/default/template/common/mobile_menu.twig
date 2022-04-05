@@ -1,0 +1,47 @@
+<div class="container-mob">
+    <div class="content">
+        <div class="head">
+            <div class="header-center">
+                <ul class="sex">
+                    {% for category in categories %}
+                        <li class="sex-current">
+                            <span class="sex-choise">{{ category.name }}</span>
+                        </li>
+                    {% endfor %}
+                </ul>
+                {{ search }}
+            </div>
+            {{ language }}
+        </div>
+        <div class="body">
+            {% for key,category in categories %}
+                <div class="child-menu{% if key == 0 %} active{% endif %}">
+                    <div class="inner">
+                        {% for child in category.children %}
+                            <div class="col">
+                                <p class="title_cat">{{ child.name }}</p>
+                                <ul>
+                                    {% for child2 in child.children %}
+                                        <li>
+                                            <a href="{{ child2.href }}">{{ child2.name }}</a>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="bottom">
+        <div class="col-bottom">
+            <ul>
+                <li><a href="#">DEHA</a></li>
+                <li><a href="#">American vintage</a></li>
+                <li><a href="#">george gina lucy</a></li>
+                <li><a href="#">birkenstock</a></li>
+            </ul>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,68 @@
+<div id="TT-instagram-feed" class="clo-sm-12">
+<div class="container">
+<div class="row">
+<div class="instagram instagram1 col-sm-4 col-md-3 col-xs-12">
+    <h2>{{ title }}</h2>
+	<div class="sub-heading">Trending Art Gallery of This Season</div>
+	<div class="sub-heading-content">Veritatis et quasi architecto beatae vitae dicta sunt...</div>
+	<div class="customNavigation">
+		<a class="btn prev bannerproduct_prev">Prev</a>
+		<a class="btn next bannerproduct_next">Next</a>
+	</div>
+</div>
+        {% if is_error %}
+
+    <div class="row">
+        <h4>{{ error }}</h4>
+    </div>
+        {% else %}
+		
+<div class="instagram instagram2 col-sm-8 col-md-9 col-xs-12">
+<div class="row">
+	<div class="insta-feed">
+	<div id="ttinstafeed-carousel">
+          {% for image in images %}
+          {{ '<div class="image-wrapper">' }}
+		  <div class="instaitem">
+          {% set link = 'https://www.instagram.com/' ~ username %}
+		  {{ '<img src="'~image~'" alt="image"/>' }}
+		  </div>
+          {{ '<a target="_blank" href="' ~image~ '" class="tticon-zoom" data-lightbox="example-set-1" title="Click to view Full Image">' }}
+          
+		  	<span class="ttview"><i class="fa fa-search" aria-hidden="true"></i></span>
+          {{ '</a>' }}
+          {{ '</div>' }}
+      {% endfor %}
+
+	</div>
+	</div>
+</div>
+	{% endif %}
+    </div>
+</div>
+</div>
+</div>
+</div>
+<script>
+var bannerproduct = $("#ttinstafeed-carousel");
+      bannerproduct.owlCarousel({
+		 autoPlay : true,
+     	 items : 3, //10 items above 1000px browser width
+     	 itemsDesktop : [1200,3], 
+     	 itemsDesktopSmall : [991,2], 
+     	 itemsTablet: [767,2], 
+     	 itemsMobile : [480,1],
+		 pagination:false,
+		 navigation: false
+});
+
+      // Custom Navigation Events
+
+     $(".bannerproduct_next").click(function(){
+        bannerproduct.trigger('owl.next');
+      })
+      $(".bannerproduct_prev").click(function(){
+        bannerproduct.trigger('owl.prev');
+      })
+
+</script>

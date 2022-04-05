@@ -1,0 +1,65 @@
+<div id="cat_feature" class="tt-category-featured">
+<div class="container">
+<div class="row">
+<div class="tt-titletab  col-sm-2">
+	<div class="box-heading">
+	<span> Trending in this Season </span>
+	<h3>{{ heading_title }}</h3>
+	</div>
+</div>
+<div class="ttfcat-items col-sm-10">
+<div class="category-feature tt-carousel">
+  {% for category in categories %}
+  <div class="item">
+    <div class="content">
+      <div class="image col-sm-12">
+	  	<a href="{{ category.href }}">
+			<img src="{{ category.thumb }}" alt="{{ category.name }}" title="{{ category.name }}" class="img-responsive" />
+		</a>
+	  </div>
+	  <div class="caption col-sm-12">
+	  	<div class="cat-title">
+        	<h4><a href="{{ category.href }}">{{ category.name }}</a></h4>
+		</div>
+		<div class="cat-sub">
+		  {% if category.children %}
+		  <ul>
+		  {% for child in category.children %}
+		  <li><a href="{{ child.href }}" class="list-group-item">{{ child.name }}</a></li>
+		  
+		  {% endfor %}
+		  </ul>
+		  {% endif %}
+	   </div>
+  	  </div> <!-- Caption END -->
+  </div>
+  </div>
+  {% endfor %}
+</div>
+
+</div>
+</div>
+</div>
+</div>
+<script>
+var cat_feature = $(".category-feature.tt-carousel");
+      cat_feature.owlCarousel({
+     	 autoPlay : true,
+		 navigation: false,
+		 pagination : false,
+     	 items : 3, //10 items above 1000px browser width
+     	 itemsDesktop : [1200,3], 
+     	 itemsDesktopSmall : [1199,2], 
+     	 itemsTablet: [767,2], 
+     	 itemsMobile : [543,1] 
+      });
+
+      // Custom Navigation Events
+	  $(".ttfcat_prev").click(function(){
+        cat_feature.trigger('owl.prev');
+      })
+      $(".ttfcat_next").click(function(){
+        cat_feature.trigger('owl.next');
+      })
+</script>
+

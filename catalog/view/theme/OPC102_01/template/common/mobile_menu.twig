@@ -1,0 +1,52 @@
+<div class="container-mob">
+    <div class="content">
+        <div class="head">
+            <div class="header-center">
+                <ul class="sex">
+                    {% for key,category in categories %}
+                        <li class="{%  if category.category_id == cat_id_1 %}sex-current{% endif %}" data-tab-open="{{ category.category_id }}">
+                            <span class="sex-choise">{{ category.name }}</span>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="body">
+            {% for key,category in categories %}
+                <div class="child-menu{%  if category.category_id == cat_id_1 %} active{% endif %}" data-tab="{{ category.category_id }}">
+                    <div class="inner">
+                        {% for child in category.children %}
+                            <div class="col {% if child.category_id == category_id %} open{% endif %}">
+                                <p class="title_cat">{{ child.name }}</p>
+                                <ul>
+                                    {% for child2 in child.children %}
+                                        <li>
+                                            <a href="{{ child2.href }}" {% if child2.category_id == child_id %}class="active"{% endif %}>{{ child2.name }}</a>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% if manufacturers %}
+        <div class="bottom">
+            <div class="col-actions">
+                {{ search }}
+                {{ language }}
+            </div>
+            <div class="col-bottom">
+                <ul>
+                    {% for manufacturer in manufacturers %}
+                        <li>
+                            <a href="{{ manufacturer.href }}">{{ manufacturer.name }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    {% endif %}
+</div>

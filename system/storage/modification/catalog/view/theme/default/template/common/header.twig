@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<!--[if IE 8 ]><html dir="{{ direction }}" lang="{{ lang }}" class="ie8"><![endif]-->
+<!--[if IE 9 ]><html dir="{{ direction }}" lang="{{ lang }}" class="ie9"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html dir="{{ direction }}" lang="{{ lang }}">
+<!--<![endif]-->
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>{{ title }}</title>
+
+{% if noindex %}
+<!-- OCFilter Start -->
+<meta name="robots" content="noindex,nofollow" />
+<!-- OCFilter End -->
+{% endif %}
+      
+<base href="{{ base }}" />
+{% if description %}
+<meta name="description" content="{{ description }}" />
+{% endif %}
+{% if keywords %}
+<meta name="keywords" content="{{ keywords }}" />
+{% endif %}
+<script src="catalog/view/javascript/jquery/jquery-2.1.1.min.js" type="text/javascript"></script>
+{# <link href="catalog/view/javascript/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen" /> #}
+<script src="catalog/view/javascript/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<link href="catalog/view/javascript/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" integrity="sha512-yHknP1/AwR+yx26cB1y0cjvQUMvEa2PFzt1c9LlS4pRQ5NOTZFWbhBig+X9G9eYW/8m0/4OXNx8pxJ6z57x0dw==" crossorigin="anonymous" />
+<link href="catalog/view/theme/default/stylesheet/fonts.css" rel="stylesheet">
+<link href="catalog/view/theme/default/stylesheet/style.css" rel="stylesheet">
+<link href="catalog/view/theme/default/stylesheet/media.css" rel="stylesheet">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js" integrity="sha512-XtmMtDEcNz2j7ekrtHvOVR4iwwaD6o/FUJe6+Zq+HgcCsk3kj4uSQQR8weQ2QVj1o0Pk6PwYLohm206ZzNfubg==" crossorigin="anonymous"></script>
+{% for style in styles %}
+<link href="{{ style.href }}" type="text/css" rel="{{ style.rel }}" media="{{ style.media }}" />
+{% endfor %}
+{% for script in scripts %}
+<script src="{{ script }}" type="text/javascript"></script>
+{% endfor %}
+<script src="catalog/view/javascript/common.js" type="text/javascript"></script>
+{% for link in links %}
+<link href="{{ link.href }}" rel="{{ link.rel }}" />
+{% endfor %}
+{% for analytic in analytics %}
+{{ analytic }}
+{% endfor %}
+</head>
+<body>
+  	<header>
+		<div class="container-md">
+			<div class="logo">
+				<a href="{{ home }}"><img src="/image/svg/logo.svg" alt=""></a>
+			</div>
+			<div class="header-center">
+				{{ menu }}
+				{{ search }}
+			</div>
+			{{ language }}
+			<div class="header-nav">
+				{% if logged %}
+					<a href="{{ account }}">
+						<img src="/image/svg/user.svg" alt="">
+					</a>
+				{% else %}
+					<a href="javascript:void(0);">
+						<img src="/image/svg/user.svg" alt="">
+					</a>
+				{% endif %}
+				<a href="{{ wishlist }}">
+					<img src="/image/svg/favorite.svg" alt="{{ text_wishlist }}">
+				</a>
+				<a href="{{ shopping_cart }}">
+					<img src="/image/svg/checkout.svg" alt="">
+				</a>
+			</div>
+			<div class="header-mob-trigger">
+				<div class="one"></div>
+				<div class="two"></div>
+			</div>
+		</div>
+		{{ mobile_menu }}
+	</header>

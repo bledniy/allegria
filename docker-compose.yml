@@ -1,0 +1,26 @@
+version: "3"
+
+services:
+  web-allegria:
+    image: nginx
+    depends_on:
+      - fpm
+    working_dir: /var/www/html
+    volumes:
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./:/var/www/html
+    networks:
+      - app-external
+
+  fpm:
+    build:
+      context: docker
+      dockerfile: Fpm.Dockerfile
+    volumes:
+      - ./:/var/www/html
+    networks:
+      - app-external
+
+networks:
+  app-external:
+    external: true

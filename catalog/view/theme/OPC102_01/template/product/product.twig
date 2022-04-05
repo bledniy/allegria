@@ -1,0 +1,442 @@
+{{ header }}
+<div id="product-product" class="container">
+  <div class="breadcrumbs">
+    <ul class="breadcrumb">
+      {% for breadcrumb in breadcrumbs %}
+        <li{% if breadcrumb.current %} class="current"{% endif %}>
+          <a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+  <section class="product-page" id="content">
+		<div class="container" id="product">
+			<div class="top-mob">
+				<h2 class="title">{{ heading_title }}</h2>
+				<h3 class="cat">{{ category_name }}</h3>
+				{% if price %}
+          <h4 class="price">
+            {% if special %}
+              <span class="old">{{ special }}</span>
+              <span class="new">{{ price }}</span>
+            {% else %}
+              <span class="new">{{ price }}</span>
+            {% endif %}
+          </h4>
+        {% endif %}
+			</div>
+			<div class="left">
+				<div class="product-small-slider">
+                    {% if images %}
+                        {% for image in images %}
+                            <img src="{{ image.thumb }}"
+                                title="{{ heading_title }}"
+                                alt="{{ heading_title }}" />
+                        {% endfor %}
+                    {% endif %}
+				</div>
+				<div class="product-big-slider">
+					{% if images %}
+                        {% for image in images %}
+                            <a href="{{ image.popup }}"
+                            title="{{ heading_title }}">
+                            <img src="{{ image.big }}"
+                                title="{{ heading_title }}"
+                                alt="{{ heading_title }}" />
+                            </a>
+                        {% endfor %}
+                    {% endif %}
+				</div>
+                <button type="button"
+                    data-wishlist-toggle="{{ product_id }}"
+                    class="favorite_button{% if in_wishlist %} active{% endif %}"></button>
+            </div>
+            <script>
+                $(document).ready(function(){
+                $('.product-big-slider > a').magnificPopup({
+                    type: 'image',
+                    gallery:{
+                    enabled:true,
+                    tCounter: '<span class="mfp-counter">%curr% из %total%</span>'
+                    }
+                })
+                $('.product-big-slider').slick({
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    arrows: false,
+                    fade: true,
+                    asNavFor: '.product-small-slider',
+                    responsive: [
+                    {
+                        breakpoint: 1000,
+                        settings: {
+                        slidesToShow: 1,
+                        centerMode: true,
+                        fade: false,
+                        asNavFor: false,
+                        variableWidth: true
+                        }
+                    }
+                    ]
+                });
+                $('.product-small-slider').slick({
+                    slidesToShow: 5,
+                    slidesToScroll: 1,
+                    asNavFor: '.product-big-slider',
+                    dots: false,
+                    vertical: true,
+                    centerMode: true,
+                    focusOnSelect: true
+                });
+                })
+            </script>
+			<div class="right">
+				<h2 class="title">{{ heading_title }}</h2>
+				<h3 class="cat">{{ category_name }}</h3>
+                <div class="description">{{ description }}</div>
+                <!-- <div class="attributes">
+                {% for attribute_group in attribute_groups %}
+                    {% for attribute in attribute_group.attribute %}
+                    <p><strong>{{ attribute.name }}</strong></p>
+                    <p>{{ attribute.text }}</p>
+                    {% endfor %}
+                {% endfor %}
+                </div> -->
+                {% if price %}
+                <h4 class="price">
+                    {% if special %}
+                    <span class="old">{{ price }}</span>
+                    <span class="new special">{{ special }}</span>
+                    {% else %}
+                    <span class="new">{{ price }}</span>
+                    {% endif %}
+                </h4>
+                {% endif %}
+                {% for key,option in options %}
+                {% if option.type == 'radio' %}
+                    {% if key == 1 %}
+                    <div class="colors js-option-container">
+                        <p>{{ option.name }}</p>
+                        {% for option_value in option.product_option_value %}
+                            <label{% if option_value.in_stock is empty %} class="none"{% endif %}>
+                            <input type="radio"
+                                    name="option[{{ option.product_option_id }}]"
+                                    value="{{ option_value.product_option_value_id }}" />
+                            <span class="radio_box" {% if option_value.image %} style="background-image: url({{ option_value.image }})"{% endif %}>
+                            </span>
+                            </label>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    <div class="size js-option-container">
+                        <p>{{ option.name }}</p>
+                        {% for option_value in option.product_option_value %}
+                            <label{% if option_value.in_stock is empty %} class="none"{% endif %}>
+                            <input type="radio"
+                                    name="option[{{ option.product_option_id }}]"
+                                    value="{{ option_value.product_option_value_id }}" />
+                                <span class="radio_box"{% if option_value.image %} style="background-image: url({{ option_value.image }})"{% endif %}>
+                                    {{ option_value.name }}
+                                </span>
+
+                            </span>
+                            </label>
+                        {% endfor %}
+                    </div>
+                    <a class="table-size" data-popup="size-table">Таблица размеров</a>
+                    {% endif %}
+                {% endif %}
+                {% endfor %}
+                <input type="hidden" name="quantity" value="1" id="input-quantity" class="form-control">
+                <input type="hidden" name="product_id" value="{{ product_id }}">
+				<button class="add-checkout"
+                id="button-cart"
+                type="button">добавить в корзину</button>
+				<button class="buy-click js-quickview" onclick="tt_quickview.ajaxView('{{ share }}')" type="button" data-product-id="{{ product_id }}">купить в один клик</button>
+				<div class="info">
+                    {% if payment %}
+					    <a href="#" data-popup="payment">Оплата и доставка</a>
+                    {% endif %}
+                    {% if refund %}
+					    <a href="#" data-popup="refund">Возврат и обмен</a>
+                    {% endif %}
+				</div>
+                {% if description %}
+                <div class="desc">
+                    <h5>ИНФОРМАЦИЯ О ТОВАРЕ</h5>
+                    <p>{{ description }}</p>
+                </div>
+                {% endif %}
+			</div>
+            {% if products %}
+                <div class="bottom">
+                <h2>{{ text_related }}</h2>
+                <div id="similar-slider" class="popular-slider">
+                    {% for product in products %}
+                    <div class="item">
+                        <div class="inner">
+                        <div class="thumb">
+                            <a href="{{ product.href }}">
+                            <img src="{{ product.thumb }}"
+                                alt="{{ product.name }}"
+                                title="{{ product.name }}"/>
+                            </a>
+                        </div>
+                        <a href="{{ product.href }}"><h6 class="title">{{ product.name }}</h6></a>
+                        <a href="{{ product.href }}"><p class="desc">{{ product.description }}</p></a>
+                        {% if product.price %}
+                            <p class="price">
+                            {% if product.special %}
+                                <span class="old">{{ product.price }}</span>
+                                <span class="new">{{ product.special }}</span>
+                            {% else %}
+                                <span class="new">{{ product.price }}</span>
+                            {% endif %}
+                            </p>
+                        {% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                </div>
+                <script>
+                $(document).ready(function(){
+                    $('#similar-slider').slick({
+                    arrows: true,
+                    dots: false,
+                    slidesToShow: 3,
+                    responsive: [
+                        {
+                            breakpoint: 600,
+                        settings: {
+                            slidesToShow: 2
+                        }
+                        }
+                    ]
+                    });
+                })
+                </script>
+            {% endif %}
+		</div>
+	  	  </section>
+    <div class="popup-bg"></div>
+    <div class="popup popup--image" id="size-table">
+        <button type="button" class="popup__close js-popup-close">
+            <svg width="20" height="20" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L21 21" stroke="#0F303F"></path><path d="M21 1L0.999999 21" stroke="#0F303F"></path></svg>
+        </button>
+        <div class="popup__content table-size-popup-image">
+            <img src="/image/catalog/size-table.jpg" alt="">
+        </div>
+    </div>
+    {% if payment %}
+    <div class="popup popup--info" id="payment">
+        <button type="button" class="popup__close js-popup-close">
+            <svg width="20" height="20" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L21 21" stroke="#0F303F"></path><path d="M21 1L0.999999 21" stroke="#0F303F"></path></svg>
+        </button>
+        <div class="popup__content">
+            {{ payment }}
+        </div>
+    </div>
+    {% endif %}
+    {% if refund %}
+        <div class="popup popup--info" id="refund">
+            <button type="button" class="popup__close js-popup-close">
+                <svg width="20" height="20" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L21 21" stroke="#0F303F"></path><path d="M21 1L0.999999 21" stroke="#0F303F"></path></svg>
+            </button>
+            <div class="popup__content">
+                {{ refund }}
+            </div>
+        </div>
+    {% endif %}
+<script type="text/javascript"><!--
+$('select[name=\'recurring_id\'], input[name="quantity"]').change(function(){
+	$.ajax({
+		url: 'index.php?route=product/product/getRecurringDescription',
+		type: 'post',
+		data: $('input[name=\'product_id\'], input[name=\'quantity\'], select[name=\'recurring_id\']'),
+		dataType: 'json',
+		beforeSend: function() {
+			$('#recurring-description').html('');
+		},
+		success: function(json) {
+			$('.alert-dismissible, .text-danger').remove();
+
+			if (json['success']) {
+				$('#recurring-description').html(json['success']);
+			}
+		}
+	});
+});
+//--></script>
+<script type="text/javascript"><!--
+$('#button-cart').on('click', function() {
+	$.ajax({
+		url: 'index.php?route=checkout/cart/add',
+		type: 'post',
+		data: $('#product input[type=\'text\'], #product input[type=\'hidden\'], #product input[type=\'radio\']:checked, #product input[type=\'checkbox\']:checked, #product select, #product textarea'),
+		dataType: 'json',
+		beforeSend: function() {
+			$('#button-cart').button('loading');
+		},
+		complete: function() {
+			$('#button-cart').button('reset');
+		},
+		success: function(json) {
+			$('.alert-dismissible, .text-danger').remove();
+			$('.form-group').removeClass('has-error');
+
+
+			if (json['error']) {
+        if( json['error']['option'] ){
+          for (i in json['error']['option']) {
+           $('[name="option[' + i + ']"]').parents('.js-option-container').before('<span class="text-danger" style="margin-bottom: 5px;">' + json['error']['option'][i] + '</span>');
+          }
+        }
+
+				if (json['error']['recurring']) {
+					$('select[name=\'recurring_id\']').after('<div class="text-danger">' + json['error']['recurring'] + '</div>');
+				}
+
+				// Highlight any found errors
+				$('.text-danger').parent().addClass('has-error');
+			}
+
+			if (json['success']) {
+				$('.breadcrumbs').before('<div class="alert alert-success alert-dismissible">' + json['success'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+
+        setTimeout(function () {
+          $('#cart .badge-content').html(json['total']);
+        }, 100);
+
+				$('html, body').animate({ scrollTop: 0 }, 'slow');
+			}
+		},
+        error: function(xhr, ajaxOptions, thrownError) {
+            alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+        }
+	});
+});
+//--></script>
+<script type="text/javascript"><!--
+$('.date').datetimepicker({
+	language: '{{ datepicker }}',
+	pickTime: false
+});
+
+$('.datetime').datetimepicker({
+	language: '{{ datepicker }}',
+	pickDate: true,
+	pickTime: true
+});
+
+$('.time').datetimepicker({
+	language: '{{ datepicker }}',
+	pickDate: false
+});
+
+$('button[id^=\'button-upload\']').on('click', function() {
+	var node = this;
+
+	$('#form-upload').remove();
+
+	$('body').prepend('<form enctype="multipart/form-data" id="form-upload" style="display: none;"><input type="file" name="file" /></form>');
+
+	$('#form-upload input[name=\'file\']').trigger('click');
+
+	if (typeof timer != 'undefined') {
+    	clearInterval(timer);
+	}
+
+	timer = setInterval(function() {
+		if ($('#form-upload input[name=\'file\']').val() != '') {
+			clearInterval(timer);
+
+			$.ajax({
+				url: 'index.php?route=tool/upload',
+				type: 'post',
+				dataType: 'json',
+				data: new FormData($('#form-upload')[0]),
+				cache: false,
+				contentType: false,
+				processData: false,
+				beforeSend: function() {
+					$(node).button('loading');
+				},
+				complete: function() {
+					$(node).button('reset');
+				},
+				success: function(json) {
+					$('.text-danger').remove();
+
+					if (json['error']) {
+						$(node).parent().find('input').after('<div class="text-danger">' + json['error'] + '</div>');
+					}
+
+					if (json['success']) {
+						alert(json['success']);
+
+						$(node).parent().find('input').val(json['code']);
+					}
+				},
+				error: function(xhr, ajaxOptions, thrownError) {
+					alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+				}
+			});
+		}
+	}, 500);
+});
+//--></script>
+<script type="text/javascript"><!--
+$('#review').delegate('.pagination a', 'click', function(e) {
+    e.preventDefault();
+
+    $('#review').fadeOut('slow');
+
+    $('#review').load(this.href);
+
+    $('#review').fadeIn('slow');
+});
+
+$('#review').load('index.php?route=product/product/review&product_id={{ product_id }}');
+
+$('#button-review').on('click', function() {
+	$.ajax({
+		url: 'index.php?route=product/product/write&product_id={{ product_id }}',
+		type: 'post',
+		dataType: 'json',
+		data: $("#form-review").serialize(),
+		beforeSend: function() {
+			$('#button-review').button('loading');
+		},
+		complete: function() {
+			$('#button-review').button('reset');
+		},
+		success: function(json) {
+			$('.alert-dismissible').remove();
+
+			if (json['error']) {
+				$('#review').after('<div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> ' + json['error'] + '</div>');
+			}
+
+			if (json['success']) {
+				$('#review').after('<div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> ' + json['success'] + '</div>');
+
+				$('input[name=\'name\']').val('');
+				$('textarea[name=\'text\']').val('');
+				$('input[name=\'rating\']:checked').prop('checked', false);
+			}
+		}
+	});
+});
+
+$(document).ready(function() {
+	$('.thumbnails').magnificPopup({
+		type:'image',
+		delegate: 'a',
+		gallery: {
+			enabled: true
+		}
+	});
+});
+//--></script>
+{{ footer }}

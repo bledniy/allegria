@@ -1,0 +1,443 @@
+/* newsletter popup */
+.b-close{
+	display: block;
+	z-index: 1;
+	position: relative;
+}
+.b-close::before {
+	background: rgba(0, 0, 0, 0) url("images/sprite.png") no-repeat scroll -11px -282px;
+	content: "";
+	height: 25px;
+	left: 0;
+	position: absolute;
+	right: auto;
+	top: 0;
+	transition: all 0.5s ease-in-out 0ms;
+	-webkit-transition: all 0.5s ease-in-out 0ms;
+	-moz-transition: all 0.5s ease-in-out 0ms;
+	-o-transition: all 0.5s ease-in-out 0ms;
+	-ms-transition: all 0.5s ease-in-out 0ms;
+	width: 25px;
+	z-index: 1;
+}
+#popup2:hover .b-close::before {
+	transform: rotate(180deg);
+	-webkit-transform: rotate(180deg);
+	-moz-transform: rotate(180deg);
+	-o-transform: rotate(180deg);
+	-ms-transform: rotate(180deg);
+}
+.b-close span { display:none; }
+.newletter-popup {
+	background: #ffffff;
+	background-attachment: scroll;
+	-webkit-background-size: contain;
+	-moz-background-size: contain;
+	-o-background-size: contain;
+	background-size: contain;
+	-webkit-background-position: center bottom;
+	-moz-background-position: center bottom;
+	-o-background-position: center bottom;
+	-webkit-background-repeat: no-repeat;
+	-moz-background-repeat: no-repeat;
+	-o-background-repeat: no-repeat;
+	background-repeat: no-repeat;
+	top: 47% !important;
+	margin-top: -220px;
+	position: fixed !important;
+	text-align: center;
+	display: none;
+	height: auto;
+	max-width: 790px;
+	border: 10px solid #fff;
+}
+.newletter-popup .box {
+	background: #fff none repeat scroll 0 0;
+	float: right;
+	margin: 70px 0 10px;
+	text-align: center;
+}
+.newslatter-img {
+   background: #ffffff url("images/newsletter.jpg") no-repeat scroll 0 center;
+	height: 470px;
+	padding: 0;
+}
+.newletter-popup #boxes .newletter-title h2 {
+	color: #333;
+	font: 400 32px/30px "Oswald",Helvetica,sans-serif;
+	margin: 0 0 15px;
+	text-transform: uppercase;
+}
+.newletter-popup #frm_subscribe {
+	float: left;
+	width: 100%;
+	margin: 5px 0 0;
+}
+.newletter-popup .newletter-title {
+  float: left;
+  position: relative;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+.newletter-popup #frm_subscribe{
+	color: #666;
+	font-size: 14px;
+	line-height: 24px;
+	margin-bottom: 20px;
+}
+.newletter-popup #frm_subscribe .btn-primary {
+	border-radius: 25px;
+	cursor: pointer;
+	display: inline-block;
+	font-size: 14px;
+	font-weight: 600;
+}
+.newletter-popup .newleter-content {
+  float: left;
+  width: 100%;
+}
+#boxes .box-content label {
+	font-weight: 400;
+	color: #666;
+	font-size: 14px;
+	line-height: 20px;
+	margin: 0;
+	cursor: pointer;
+	letter-spacing: 1px;
+}
+#boxes .box-content label:hover {
+	color: #000000;
+}
+#boxes  #frm_subscribe .required{
+	color: #f00;
+	padding-right: 5px;
+}
+#boxes #frm_subscribe #subscribe_pemail {
+	margin: 25px 0 30px;
+	background-color: #f5f5f5;
+	border: 1px solid #e5e5e5;
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-khtml-border-radius: 4px;
+	height: 45px;
+	padding: 5px 15px;
+	width: 80%;
+	text-align: center;
+	color: #666;
+	letter-spacing: 1px;
+}
+#boxes .box-content .subscribe-bottom #newsletter_popup_dont_show_again{
+	display: inline-block;
+	margin: 0;
+	vertical-align: top;
+}
+#boxes  #frm_subscribe #notification{
+	color: #f00;
+}
+.newletter-popup #frm_subscribe .checkbox-wrapper {
+	margin: 0;
+}
+#subscribe_popup #notification > div {
+  margin: 10px 0 0;
+}
+#boxes  #frm_subscribe #notification .success{
+	color: #4caf50;
+}
+#popup2{
+	cursor: pointer;
+	height: 25px;
+	line-height: 24px;
+	padding: 0;
+	position: absolute;
+	right: 0;
+	text-align: center;
+	top: 0;
+	width: 25px;
+}
+.popup-button {
+	float: none;
+	text-align: center;
+	vertical-align: top;
+	width: 100%;
+	cursor: pointer;
+	display: inline-block;
+	margin-bottom: 20px;
+}
+/* newsllter */
+#dialog-normal .newletter-title h2 {
+	position: relative;
+	border: medium none;
+	color: #000;
+	float: left;
+	font: 400 28px/32px "Oswald",Helvetica,sans-serif;
+	padding: 0 0 0 52px;
+	text-align: left;
+	width: 100%;
+	background: none;
+	margin: 0;
+	text-transform: uppercase !important;
+}
+.newletter-title {
+	float: left;
+	padding: 10px 15px;
+	margin: 15px 0;
+}
+.newletter-desc {
+	color: #ccc;
+	float: left;
+	font: 400 13px/24px "Source Sans Pro",Helvetica,sans-serif;
+	text-align: center;
+	width: 100%;
+	margin: 0 0 20px;
+	display:none;
+}
+#dialog-normal .newletter-title .tt-title::before {
+	background: rgba(0, 0, 0, 0) url("images/sprite.png") repeat scroll -30px -481px;
+	content: "";
+	float: left;
+	height: 40px;
+	width: 50px;
+	position: absolute;
+	left: 0;
+	top: 0;
+	bottom: auto;
+	right: auto;
+	transition: all 400ms ease-in-out 0s;
+	-webkit-transition: all 400ms ease-in-out 0s;
+	-moz-transition: all 400ms ease-in-out 0s;
+	-o-transition: all 400ms ease-in-out 0s;
+	-ms-transition: all 400ms ease-in-out 0s;
+}
+#dialog-normal .newleter-content {
+	float: right;
+	margin: 0;
+	padding: 20px 15px;
+}
+#form_subscribe {
+	float: left;
+	position: relative;
+	width: 100%;
+	background: #fff;
+	border-radius: 25px;
+	-moz-border-radius: 25px;
+	-webkit-border-radius: 25px;
+	-khtml-border-radius: 25px;
+}
+.newletter-subscribe {
+	float: left;
+	width: 100%;
+}
+.newletter-subscribe .box {
+  float: left;
+  width: 100%;
+}
+#subscribe_email {
+	float: right;
+	border: none;
+	color: #666;
+	padding: 0 120px 0 15px;
+	width: 100%;
+	font: 400 14px/22px "ource Sans Pro",Helvetica,sans-serif;
+	background: none;
+	border-radius: 0;
+	-moz-border-radius: 0;
+	-webkit-border-radius: 0;
+	-khtml-border-radius: 0;
+	height: 42px;
+	max-width: 600px;
+	letter-spacing: 1px;
+}
+#subscribe_email::-webkit-input-placeholder{
+  color: #666;
+}
+#subscribe_email::-moz-placeholder{
+  color: #666;
+}
+#subscribe_email:-ms-input-placeholder{
+  color: #666;
+}
+#subscribe_email:-moz-placeholder {
+  color: #666;
+}
+#subscribe .btn {
+	background: #000;
+	color: #fff;
+	font: 600 16px/28px "Source Sans Pro",Helvetica,sans-serif;
+	height: 42px;
+	overflow: hidden;
+	padding: 6px 25px;
+	position: absolute;
+	right: 0;
+	top: 0;
+	border: none;
+	border-radius: 25px;
+	-moz-border-radius: 25px;
+	-webkit-border-radius: 25px;
+	-khtml-border-radius: 25px;
+}
+#subscribe .btn:hover {
+	background-color: #333;
+	color: #fff;
+}
+.newletter-subscribe .button i {
+   display: none;
+}
+#notification-normal {
+	float: right;
+	width: 100%;
+}
+#notification-normal div{
+	background: #dff0d8;
+	color: #3c763d;
+	font-size: 13px;
+	padding: 10px 15px;
+	margin: 5px 0 0;
+	border-radius: 25px;
+	-moz-border-radius: 25px;
+	-webkit-border-radius: 25px;
+	-khtml-border-radius: 25px;
+}
+#notification-normal div.warning{
+	background: #f2dede;
+	color: #a94442;
+}
+@media(max-width:991px){ 
+	.newletter-title {
+		float: left;
+		padding: 0;
+		margin: 10px 0;
+		width: 100%;
+		display: inline-block;
+		vertical-align: top;
+		text-align: center;
+	}
+	#dialog-normal .newletter-title h2 {
+		padding: 40px 0 0;
+		text-align: center;
+	}
+	#dialog-normal .newletter-title .tt-title::before {
+		left: 0;
+		right: 0;
+		margin: 0 auto;
+	}
+	#dialog-normal .newleter-content {
+		float: none;
+		padding: 0 0 10px;
+		width: 60%;
+		display: inline-block;
+		vertical-align: top;
+		text-align: center;
+	}
+}
+@media (min-width:600px) and (max-width:1199px) {
+	.newletter-popup {
+		max-width: 740px;
+		border: 10px solid #fff;
+		left: 10px;
+		right: 10px;
+		top: 10px;
+		bottom: 10px;
+		overflow-y: auto;
+		overflow-x: hidden;
+	}
+}
+@media(max-width:767px){ 
+	.newletter-subscribe {
+		text-align: center;
+	}
+	.newletter-title {
+		width: 100%;
+	}
+	#dialog-normal .newletter-title h2 {
+		display: inline-block;
+		float: none;
+		vertical-align: top;
+		width: auto;
+	}
+	#dialog-normal .newleter-content {
+		display: inline-block;
+		float: none;
+		vertical-align: top;
+		width: 80%;
+		text-align: center;
+	}
+}
+@media(max-width:600px){
+	.newletter-popup {
+		width: 300px;
+		margin: 0;
+		top: 1% !important;
+		height: 100%;
+		overflow-y: auto;
+	}
+	.newletter-popup .box {
+		margin: 0;
+		width: 100%;
+		padding: 12% 0;
+	}
+	.newslatter-img {
+		width: 100%;
+	}
+	#boxes #frm_subscribe #subscribe_pemail {
+		width: 80%;
+	}
+	.b-close::before {
+		background-color: #fff;
+	}
+}
+@media(max-width:480px){
+	#popup2:hover .b-close::before {
+		color: #fff;
+	}
+	.newletter-subscribe .button > span {
+		display: none;
+	}
+	.newletter-popup #boxes .newletter-title h2 {
+		font-size: 22px;
+		line-height: 24px;
+	}
+	#subscribe .btn {
+		padding: 10px 18px;
+	}
+	.newletter-subscribe .button > i {
+		display: block;
+		font-size: 18px;
+		line-height: 20px;
+		color: #fff;
+	}
+	.newletter-subscribe .button:hover > i {
+		color: #fff;
+	}
+	.newletter-desc {
+		font-size: 14px;
+		line-height: 18px;
+		padding: 0 15px;
+		margin: 5px 0;
+	}
+	#dialog-normal .newleter-content {
+	  	width: 280px;
+	}
+	#subscribe_email {
+		padding: 0 50px 0 10px;
+	}
+	#dialog-normal .newletter-title .tt-title::before {
+		bottom: 0px;
+		top: 0;
+		margin: 0 auto;
+		left: 0;
+		right: 0;
+	}
+	#notification-normal {
+		width: 100%;
+	}
+	#dialog-normal .newletter-title {
+		padding: 0;
+	}
+	#dialog-normal .newletter-title h2 {
+		padding: 38px 0 0;
+		font-size: 22px;
+		line-height: 32px;
+	}
+}

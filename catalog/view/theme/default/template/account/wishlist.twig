@@ -1,0 +1,113 @@
+{{ header }}
+<div id="account-wishlist" class="container">
+  <ul class="breadcrumb">
+    {% for breadcrumb in breadcrumbs %}
+    <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+    {% endfor %}
+  </ul>
+  {% if success %}
+  <div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> {{ success }}
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+  </div>
+  {% endif %}
+  <div class="row">{{ column_left }}
+    {% if column_left and column_right %}
+    {% set class = 'col-sm-6' %}
+    {% elseif column_left or column_right %}
+    {% set class = 'col-sm-9' %}
+    {% else %}
+    {% set class = 'col-sm-12' %}
+    {% endif %}
+    <div id="content" class="{{ class }}">{{ content_top }}
+      <h2>{{ heading_title }}</h2>
+     {% if products %}
+            <div class="product-wrapper" id="products">
+              {% for product in products %}
+                <div class="product">
+                  <div class="thumb">
+                    <a href="{{ product.href }}">
+                      <img src="{{ product.thumb }}" 
+                           alt="{{ product.name }}" 
+                           title="{{ product.name }}" /></a>
+                    {% if product.special %}
+                      <div class="sale">
+                        {{ product.special_percant }}
+                      </div>
+                    {% endif %}
+                    <button type="button"
+                            onclick="wishlist.add('{{ product.product_id }}');"
+                            class="favorite_button"></button>
+                  </div>
+                  <a href="{{ product.href }}"><h6 class="title">{{ product.name }}</h6></a>	
+                  <a href="#"><p class="cat">{{ product.category_name }}</p></a>
+                  {% if product.price %}
+                    <p class="price">
+                      {% if product.special %}
+                        <span class="old">{{ product.price }}</span>
+                        <span class="new">{{ product.special }}</span>
+                      {% else %}
+                        <span class="new">{{ product.price }}</span>
+                      {% endif %}
+                    </p>
+                  {% endif %}
+                </div>
+              {% endfor %}
+            </div>
+            {% if pagination %}
+              <div style="display:none">
+                {{ pagination }}
+              </div>
+              <button class="button-primary showmore">Показать больше</button>
+              <script>
+                $(document).ready(function(){
+                  $('.showmore').on('click', function(){
+                    var $next = $('.pagination li.active').next('li').children('a'),
+                        $showMoreButton = $(this);
+
+                    if ($next.length == 0) {
+                      return;
+                    }
+                    $.ajax({
+                      url: $next.attr('href'),
+                      type: 'GET',
+                      dataType: "html",
+                      beforeSend: function(){
+                        $showMoreButton.text('Загрузка...');
+                      },
+                      complete: function(){
+                        $showMoreButton.text('Показать еще');
+                      },
+                      success: function (data) {
+                        $data = $(data);
+                        var $container = $('#products'),
+                          items = $data.find('#products > .product');
+
+                        $container.append(items);
+                        $('.pagination').html($data.find('.pagination > *'));
+                        if ($('.pagination li.active').next('li').length == 0) {
+                          $showMoreButton.hide();
+                        }
+
+                        $data.filter('script').each(function () {
+                          if ((this.text || this.textContent || this.innerHTML).indexOf("document.write") >= 0) {
+                            return;
+                          }
+                          $.globalEval(this.text || this.textContent || this.innerHTML || '');
+                        });
+                      
+                      }
+                    });
+                  })
+                })
+              </script>
+            {% endif %}
+        {% else %}
+      <p>{{ text_empty }}</p>
+      {% endif %}
+      <div class="buttons clearfix">
+        <div class="pull-right"><a href="{{ continue }}" class="btn btn-primary">{{ button_continue }}</a></div>
+      </div>
+      {{ content_bottom }}</div>
+    {{ column_right }}</div>
+</div>
+{{ footer }}

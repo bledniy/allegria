@@ -1,0 +1,213 @@
+{{ header }}
+<div id="product-category">
+  <div class="breadcrumbs">
+		<ul>
+      {% for breadcrumb in breadcrumbs %}
+        {% if breadcrumb.current %}
+          <li><a href="{{ breadcrumb.href }}"
+                 class="current">{{ breadcrumb.text }}</a></li>
+        {% else %}
+          <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+        {% endif %}
+      {% endfor %}
+		</ul>
+	</div>
+  {{ content_top }}
+    <section class="catalog" id="content">
+		<div class="container">
+			<div class="sidebar-filter">
+				<div class="filter-head-mob">
+					<div class="back">
+						<svg width="22" height="15" viewBox="0 0 22 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22 7.5H1M1 7.5L7.5 0.5M1 7.5L7.5 14.5" stroke="#0F303F"/></svg>
+					</div>
+					<h5>Фильтр</h5>
+					<div class="close">
+						<svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L21 21" stroke="#0F303F"/><path d="M21 1L0.999999 21" stroke="#0F303F"/></svg>
+					</div>
+				</div>
+				<div class="tabs_head">
+					<ul>
+                        {% for key,category in categories  %}
+                        <li class="woman_tab{% if category.category_id == cat_id_1 %} active{% endif %}" data-tab-open="{{ category.category_id }}">{{ category.name }}</li>
+                        {% endfor %}
+					</ul>
+				</div>
+                {% for key,category in categories  %}
+                    <div class="tabs_body woman_filter_body{% if category.category_id ==cat_id_1 %} active{% endif %}" data-tab="{{ category.category_id }}">
+                        {% for child in category.children %}
+                    <div class="filter-row{% if child.category_id == category_id %} open{% endif %}">
+                        <div class="head">
+                            <a href="{{ child.href }}">{{ child.name }}</a>
+                            </div>
+                            <div class="body">
+                            <ul>
+                                {% for child2 in child.children %}
+                                <li>
+                                <a href="{{ child2.href }}" {% if child2.category_id == child_id %}class="active"{% endif %}>{{ child2.name }}</a>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+                {{ column_Left }}
+
+				<div class="append-filter"></div>
+
+			</div>
+            <script>
+                $(document).ready(function(){
+                $('[data-tab-open]').on('click', function(){
+                    var id = $(this).attr('data-tab-open');
+                    if(id.length == 0) return;
+                    $('[data-tab].active').removeClass('active');
+                    $('[data-tab-open].active').removeClass('active');
+
+                    $('[data-tab="' + id + '"]').addClass('active');
+					$(this).addClass('active');
+
+                });
+
+                $(".catalog .sidebar-filter .content-filter .filter-block").click(function(){
+                    $(this).toggleClass('open');
+                });
+                })
+            </script>
+
+			<div class="sort-method-mob">
+				<div class="sort-head">
+					<div class="clean"></div>
+					<h5>{{ text_sort }}</h5>
+					<div class="close">
+						<svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L21 21" stroke="#0F303F"/><path d="M21 1L0.999999 21" stroke="#0F303F"/></svg>
+					</div>
+				</div>
+				<div class="sort-body">
+					<div class="sort">
+						<ul>
+							{% for sorts in sorts %}
+								{% if sorts.value == '%s-%s'|format(sort, order) %}
+									<li class="active"><a href="{{ sorts.href }}">{{ sorts.text }}</a> </li>
+								{% else %}
+									<li><a href="{{ sorts.href }}">{{ sorts.text }}</a> </li>
+								{% endif %}
+							{% endfor %}
+						</ul>
+					</div>
+				</div>
+			</div>
+
+			<div class="content">
+				<div class="head">
+					<h2>{{ heading_title }}</h2>
+					{{ oc_filter }}
+					<div class="filter-block-bottom">
+						<div class="quality">{{ product_total }}</div>
+						<div class="sort">
+                            <label for="input-sort">{{ text_sort }}</label>
+							<select id="input-sort" onchange="location = this.value;" autocomplete="off">
+                                {% for sorts in sorts %}
+                                    {% if sorts.value == '%s-%s'|format(sort, order) %}
+                                        <option value="{{ sorts.href }}" selected="selected">{{ sorts.text }}</option>
+                                    {% else %}
+                                        <option value="{{ sorts.href }}">{{ sorts.text }}</option>
+                                    {% endif %}
+                                {% endfor %}
+							</select>
+						</div>
+					</div>
+					<div class="content-filter-mob">
+						<div class="filter-block" id="filter_mob">
+							<h6>{{ text_filter }}</h6>
+						</div>
+						<div class="filter-block" id="sort_mob">
+							<h6>{{ text_sort }}</h6>
+						</div>
+					</div>
+				</div>
+				<div class="body">
+          {% if products %}
+            <div class="product-wrapper" id="products">
+              {% for product in products %}
+                <div class="product">
+                  <div class="thumb">
+                    <a href="{{ product.href }}">
+                      <img src="{{ product.thumb }}"
+                           alt="{{ product.name }}"
+                           title="{{ product.name }}" /></a>
+                    {% if product.special %}
+                      <div class="sale">
+                        {{ product.special_percant }}
+                      </div>
+                    {% endif %}
+                    <button type="button"
+                            data-wishlist-toggle="{{ product.product_id }}"
+                            class="favorite_button{% if product.in_wishlist %} active{% endif %}"></button>
+                  </div>
+                  <a href="{{ product.href }}"><h6 class="title">{{ product.name }}</h6></a>
+                  {% if product.price %}
+                    <p class="price">
+                      {% if product.special %}
+                        <span class="old">{{ product.price }}</span>
+                        <span class="new special">{{ product.special }}</span>
+                      {% else %}
+                        <span class="new">{{ product.price }}</span>
+                      {% endif %}
+                    </p>
+                  {% endif %}
+                </div>
+              {% endfor %}
+            </div>
+            {% if pagination %}
+              <div style="display:none">
+                {{ pagination }}
+              </div>
+              <button class="button-primary showmore" type="button">{{ text_show_more }}</button>
+              <script>
+                $(document).ready(function(){
+                  $('.showmore').on('click', function(){
+                    var $next = $('.pagination li.active').next('li').children('a'),
+                        url = $next.attr('href'),
+                        $showMoreButton = $(this);
+
+                    if ($next.length == 0) {
+                      return;
+                    }
+                    $.ajax({
+                      url: url,
+                      type: 'GET',
+                      dataType: "html",
+                      beforeSend: function(){
+                        $showMoreButton.text('Загрузка...');
+                      },
+                      complete: function(){
+                        $showMoreButton.text('Показать еще');
+                      },
+                      success: function (data) {
+                        $data = $(data);
+                        var $container = $('#products'),
+                          items = $data.find('#products > .product');
+
+                        history.pushState(null, null, url)
+
+                        $container.append(items);
+                        $('.pagination').html($data.find('.pagination > *'));
+                        if ($('.pagination li.active').next('li').length == 0) {
+                          $showMoreButton.hide();
+                        }
+
+                      }
+                    });
+                  })
+                })
+              </script>
+            {% endif %}
+          {% endif %}
+				</div>
+			</div>
+		</div>
+	</section>
+<div>
+{{ footer }}

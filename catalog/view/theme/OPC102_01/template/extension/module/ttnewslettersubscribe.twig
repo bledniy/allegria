@@ -1,0 +1,61 @@
+<h2>{{ heading_title3  }}</h2>
+<div id="notification-normal"></div>
+<form name="subscribe" id="subscribe" class="find">
+    <input type="text" name="subscribe_email">
+    <input type="hidden" value="" name="subscribe_name" id="subscribe_name" />
+    <button type="button" onclick="email_subscribe()"><img src="image/svg/find-arrow.svg" alt=""></button>
+</form>
+<script>
+function email_subscribe(){
+	$.ajax({
+			type: 'post',
+			url: 'index.php?route=extension/module/ttnewslettersubscribe/subscribe',
+			dataType: 'html',
+            data:$("#subscribe").serialize(),
+			success: function (html) {
+			try {
+			
+				eval(html);
+			
+			} catch (e) {
+			}
+				
+			}}); 
+	
+	
+}
+function email_unsubscribe(){
+	$.ajax({
+			type: 'post',
+			url: 'index.php?route=extension/module/ttnewslettersubscribe/unsubscribe',
+			dataType: 'html',
+            data:$("#subscribe").serialize(),
+			success: function (html) {
+					try {
+					
+						eval(html);
+					
+					} catch (e) {
+					}
+			}}); 
+	$('html, body').delay( 1500 ).animate({ scrollTop: 0 }, 'slow'); 
+	
+}
+</script>
+<script>
+    $(document).ready(function() {
+		$('[name="subscribe_email"]').keypress(function(e) {
+            if(e.which == 13) {
+                e.preventDefault();
+                email_subscribe();
+            }
+			var name= $(this).val();
+		  	$('#subscribe_name').val(name);
+        });
+		$('[name="subscribe_email"]').change(function() {
+		 var name= $(this).val();
+		  		$('#subscribe_name').val(name);
+		});
+	
+    });
+</script>

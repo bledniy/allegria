@@ -1,0 +1,34 @@
+{% if categories %}
+<ul class="sex">
+  {% for category in categories %}
+    <li class="sex-current">
+      <a class="sex-choise" href="{{ category.href }}">{{ category.name }}</a>
+      <div class="child-menu">
+        <div class="inner">
+          {% for child in category.children %}
+            <div class="col">
+              <a href="{{ child.href }}" class="title_cat">{{ child.name }}</a>
+              <ul>
+                {% for child2 in child.children %}
+                  <li>
+                    <a href="{{ child2.href }}">{{ child2.name }}</a>
+                  </li>
+                {% endfor %}
+              </ul>
+            </div>
+          {% endfor %}
+          <div class="col-bottom">
+            <ul>
+              <li><a href="#">DEHA</a></li>
+              <li><a href="#">American vintage</a></li>
+              <li><a href="#">george gina lucy</a></li>
+              <li><a href="#">birkenstock</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </li>
+  {% endfor %}
+</ul>
+{% endif %} 
+

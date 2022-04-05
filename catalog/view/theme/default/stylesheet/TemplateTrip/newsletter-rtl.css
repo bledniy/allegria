@@ -1,0 +1,80 @@
+/* newsletter popup */
+#popup2 {
+	left: 5px;
+	right: auto;
+	padding: 0;
+}
+/* newsllter */
+#dialog-normal .newletter-title {
+	float:right;
+}
+.newslatter-img{
+	float:right;
+}
+.newletter-popup .box {
+	float: left;
+}
+#subscribe_email {
+	float: left;
+}
+#dialog-normal .newletter-title .tt-title::before {
+	float: right;
+	left: auto;
+	right: 0;
+}
+#dialog-normal .newleter-content{    
+	float:left;
+}
+#subscribe_email {
+	padding: 0 15px 0 120px;
+	float: right;
+	width: 100%;
+}
+#subscribe .btn {
+	left: 0;
+	right: auto;
+}
+#dialog-normal .newletter-title h2 {
+	text-align: right;
+	padding: 0 52px 0 0;
+}
+#form_subscribe {
+	float: right;
+}
+@media(max-width:991px){
+	#dialog-normal .newletter-title h2 {
+		text-align: center;
+		padding: 40px 0 0;
+	}
+	#dialog-normal .newletter-title .tt-title::before {
+		left: 0;
+		right: 0;
+	}
+	#dialog-normal .newleter-content {
+		float: none;
+	}
+}
+@media(max-width:767px){
+	#dialog-normal .newleter-content {
+		float: none;
+	}
+}
+@media(max-width:600px){
+	#popup2 {
+		left: 0;
+		right: auto;
+	}
+}
+@media(max-width:480px){
+	#subscribe_email {
+		padding: 0 15px 0 50px;
+	}
+	#dialog-normal .newletter-title h2 {
+		padding: 38px 0 0;
+	}
+	#dialog-normal .newletter-title .tt-title::before {
+		top: 0;
+		left: 0;
+		right: 0;
+	}
+}

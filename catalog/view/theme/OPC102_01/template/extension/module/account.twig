@@ -1,0 +1,56 @@
+<div class="panel panel-default account-list" id="account-sidebar">
+    <div class="list-group">
+        {% if logged %}
+            <a href="{{ edit }}" class="list-group-item">
+                <span class="list-group-item__icon">
+                    <svg width="16" height="19">
+                        <use xlink:href="/image/svg/sprites.svg#profile"></use>
+                    </svg>
+                </span>
+                <span>{{ text_edit }}</span>
+            </a>
+        {% endif %}
+            <a href="{{ address }}" class="list-group-item">
+                <span class="list-group-item__icon">
+                    <svg width="19" height="23">
+                        <use xlink:href="/image/svg/sprites.svg#address"></use>
+                    </svg>
+                </span>
+                <span>{{ text_address }}</span>
+           </a> 
+            <a href="{{ wishlist }}" class="list-group-item">
+                <span class="list-group-item__icon">
+                    <svg width="20" height="20">
+                        <use xlink:href="/image/svg/sprites.svg#wishlist"></use>
+                    </svg>
+                </span>
+                <span>{{ text_wishlist }}</span></a> 
+            <a href="{{ order }}" class="list-group-item">
+                <span class="list-group-item__icon">
+                    <svg width="18" height="17">
+                        <use xlink:href="/image/svg/sprites.svg#orders"></use>
+                    </svg>
+                </span>
+                <span>{{ text_order }}</span>
+            </a>
+        {% if logged %}
+        <a href="{{ password }}" class="list-group-item">
+            <span class="list-group-item__icon">
+                <svg width="16" height="20">
+                    <use xlink:href="/image/svg/sprites.svg#forgotten"></use>
+                </svg>
+            </span>
+            <span>{{ text_password }}</span>
+        </a>
+        <a href="{{ logout }}" class="list-group-item">
+            <span class="list-group-item__icon">
+                <svg width="17" height="21">
+                    <use xlink:href="/image/svg/sprites.svg#logout"></use>
+                </svg>
+            </span>
+            <span>{{ text_logout }}</span>
+        </a>
+        {% endif %}
+    </div>
+</div>
+

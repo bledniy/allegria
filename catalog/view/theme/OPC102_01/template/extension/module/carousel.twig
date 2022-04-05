@@ -1,0 +1,32 @@
+<section class="home_1">
+  <div class="home_slider" id="home_slider{{ module }}">
+    {% for key, banner in banners %}
+      <div class="home_slide_{{ key + 1 }}">
+
+          <div class="bg">
+            <img src="{{ banner.image }}" alt="{{ banner.title }}">
+          </div>
+          <div class="container-md">
+            {{ banner.text }}
+          </div>
+      </div>
+    {% endfor %}
+  </div>
+  <script>
+    $(document).ready( function(){
+        $('#home_slider{{ module }}').slick({
+          slidesToShow: 1,
+          arrows: false,
+          dots: true
+        });
+
+        $('#home_slider{{ module }}').on('afterChange', function(event, slick, currentSlide, nextSlide){
+          if ( $('#home_slider{{ module }} .home_slide_three, #home_slider{{ module }} .home_slide_four').hasClass("slick-current") ) {
+                $('.home_1 #home_slider{{ module }} .slick-dots').addClass('dark');
+            } else {
+              $('.home_1 #home_slider{{ module }} .slick-dots').removeClass('dark');
+            }
+        });
+    })
+  </script>
+</section>

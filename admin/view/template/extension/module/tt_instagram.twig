@@ -1,0 +1,88 @@
+{{ header }}{{ column_left }}
+<div id="content">
+    <div class="page-header">
+        <div class="container-fluid">
+            <div class="pull-right">
+                <button type="submit" form="form-module" data-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fa fa-save"></i></button>
+                <a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default"><i class="fa fa-reply"></i></a>
+			</div>
+            <h1>{{ heading_title }}</h1>
+            <ul class="breadcrumb">
+                {% for breadcrumb in breadcrumbs %}
+                <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <div class="container-fluid">
+        {% if error_warning %}
+        <div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+        </div>
+        {% endif %}
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title"><i class="fa fa-pencil"></i> {{ text_edit }}</h3>
+            </div>
+            <div class="panel-body">
+                <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-module" class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="input-status">{{ entry_status }}</label>
+                        <div class="col-sm-10">
+                            <select name="module_tt_instagram_status" id="input-status" class="form-control">
+                                {% if module_tt_instagram_status %}
+                                <option value="1" selected="selected">{{ text_enabled }}</option>
+                                <option value="0">{{ text_disabled }}</option>
+                                {% else %}
+                                <option value="1">{{ text_enabled }}</option>
+                                <option value="0" selected="selected">{{ text_disabled }}</option>
+								{% endif %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="input-name">{{ module_name_title }}</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="module_tt_instagram_module_name" value="{{ module_name_title_value }}" placeholder="{{ module_name_placeholder }}" id="input-name" class="form-control"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="input-username">{{ instagram_username }}</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="module_tt_instagram_username" value="{{ module_tt_instagram_username_value }}" placeholder="{{ instagram_username_placeholder }}" id="input-username" class="form-control" required/>
+                            <span>User should be public</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="input-access-token">{{ instagram_access_token }}</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="module_tt_instagram_access_token" value="{{ tt_instagram_access_token_value }}" placeholder="{{ instagram_access_token_placeholder }}" id="input-access-token" class="form-control" required/>
+                            <span><a href="https://elfsight.com/blog/2016/05/how-to-get-tt_instagram-access-token/">How to get Access Token?</a></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="input-username">{{ limit_text }}</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="module_tt_instagram_limit" value="{{ tt_instagram_limit_value }}" placeholder="{{ limit_text_placeholder }}" id="input-username" class="form-control" required/>
+                            <span>Max 20 is allowed because of Instagram API limit</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="input-stylesheet">{{ stylesheet }}</label>
+                        <div class="col-sm-10">
+                            <textarea name="module_tt_instagram_image_stylesheet" id="input-stylesheet" class="form-control">{{ stylesheet_value }}</textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="input-error-title">{{ error_title }}</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="module_tt_instagram_error_title" value="{{ error_title_value }}" placeholder="{{ error_title_placeholder }}" id="input-error-title" class="form-control"/>
+                            <span>Default message: User is private</span>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+{{ footer }}

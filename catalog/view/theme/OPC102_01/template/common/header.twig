@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<!--[if IE 8 ]><html dir="{{ direction }}" lang="{{ lang }}" class="ie8"><![endif]-->
+<!--[if IE 9 ]><html dir="{{ direction }}" lang="{{ lang }}" class="ie9"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html dir="{{ direction }}" lang="{{ lang }}">
+<!--<![endif]-->
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>{{ title }}</title>
+<base href="{{ base }}" />
+{% if description %}
+<meta name="description" content="{{ description }}" />
+{% endif %}
+{% if keywords %}
+<meta name="keywords" content="{{ keywords }}" />
+{% endif %}
+<script src="catalog/view/javascript/jquery/jquery-2.1.1.min.js"></script>
+<script src="catalog/view/javascript/bootstrap/js/bootstrap.min.js"></script>
+<link href='https://fonts.googleapis.com/css?family=Oswald:300,400,500,600,700' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700' rel='stylesheet' type='text/css'>
+<link href="catalog/view/javascript/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+<!--<link href="catalog/view/theme/{{ theme_path }}/stylesheet/TemplateTrip/bootstrap.min.css" rel="stylesheet" media="screen" />-->
+
+<link href="catalog/view/javascript/jquery/owl-carousel/owl.carousel.css" rel="stylesheet" media="screen" />
+<link href="catalog/view/theme/OPC102_01/stylesheet/TemplateTrip/bootstrap.min.css" rel="stylesheet" media="screen" />
+<link href="catalog/view/theme/OPC102_01/stylesheet/stylesheet.css" rel="stylesheet">
+<link href="catalog/view/theme/OPC102_01/stylesheet/TemplateTrip/ttblogstyle.css" rel="stylesheet" type="text/css" />
+<link href="catalog/view/theme/OPC102_01/stylesheet/TemplateTrip/newsletter.css" rel="stylesheet" type="text/css" />
+<link href="catalog/view/theme/OPC102_01/stylesheet/TemplateTrip/animate.css" rel="stylesheet" type="text/css" />
+<link href="catalog/view/theme/OPC102_01/stylesheet/TemplateTrip/ttcountdown.css" rel="stylesheet" type="text/css" />
+<link href="catalog/view/theme/OPC102_01/stylesheet/TemplateTrip/category-feature.css" rel="stylesheet" type="text/css" />
+
+{% if direction=='rtl' %}
+	<link href="catalog/view/theme/OPC102_01/stylesheet/TemplateTrip/rtl.css" rel="stylesheet" type="text/css" />
+	<link href="catalog/view/theme/OPC102_01/stylesheet/TemplateTrip/ttblogstyle-rtl.css" rel="stylesheet" type="text/css" />
+	<link href="catalog/view/theme/OPC102_01/stylesheet/TemplateTrip/newsletter-rtl.css" rel="stylesheet" type="text/css" />
+	<link href="catalog/view/theme/OPC102_01/stylesheet/TemplateTrip/ttcountdown-rtl.css" rel="stylesheet" type="text/css" />
+{% endif %}
+<link href="catalog/view/theme/OPC102_01/stylesheet/TemplateTrip/lightbox.css" rel="stylesheet" type="text/css" />
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" integrity="sha512-yHknP1/AwR+yx26cB1y0cjvQUMvEa2PFzt1c9LlS4pRQ5NOTZFWbhBig+X9G9eYW/8m0/4OXNx8pxJ6z57x0dw==" crossorigin="anonymous" />
+<link href="catalog/view/theme/OPC102_01/stylesheet/fonts.css" rel="stylesheet">
+<link href="catalog/view/theme/OPC102_01/stylesheet/style.css" rel="stylesheet">
+<link href="catalog/view/theme/OPC102_01/stylesheet/media.css" rel="stylesheet">
+
+{% for style in styles %}
+<link href="{{ style.href }}" type="text/css" rel="{{ style.rel }}" media="{{ style.media }}" />
+{% endfor %}
+
+<script src="catalog/view/javascript/common.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js" integrity="sha512-XtmMtDEcNz2j7ekrtHvOVR4iwwaD6o/FUJe6+Zq+HgcCsk3kj4uSQQR8weQ2QVj1o0Pk6PwYLohm206ZzNfubg==" crossorigin="anonymous"></script>
+
+<!-- TemplateTrip custom Theme JS START -->
+<script src="catalog/view/javascript/TemplateTrip/addonScript.js"></script>
+<script src="catalog/view/javascript/TemplateTrip/tt_quickview.js"></script>
+<script src="catalog/view/javascript/TemplateTrip/inview.js"></script>
+<script src="catalog/view/javascript/TemplateTrip/parallex.js"></script>
+<script src="catalog/view/javascript/TemplateTrip/theia-sticky-sidebar.min.js"></script>
+<script src="catalog/view/javascript/TemplateTrip/ResizeSensor.min.js"></script>
+<script src="catalog/view/javascript/TemplateTrip/lightbox-2.6.min.js"></script>
+<script src="catalog/view/javascript/TemplateTrip/waypoints.min.js"></script>
+<script src="catalog/view/javascript/TemplateTrip/bootstrap-notify.min.js"></script>
+<script src="catalog/view/javascript/TemplateTrip/ttcountdown.js"></script>
+<script src="catalog/view/javascript/jquery/owl-carousel/owl.carousel.min.js"></script>
+<script src="catalog/view/javascript/jquery/jquery.hoverIntent.min.js"></script>
+<!-- TemplateTrip custom Theme JS END -->
+
+{% for link in links %}
+<link href="{{ link.href }}" rel="{{ link.rel }}" />
+{% endfor %}
+
+{% for script in scripts %}
+<script src="{{ script }}"></script>
+{% endfor %}
+
+{% for analytic in analytics %}
+{{ analytic }}
+{% endfor %}
+</head>
+<body>
+<div class="background"></div>
+
+    {% if is_logged == false %}
+        <div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" id="modal-login">
+            <div class="modal__inner js-modal-close">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <h5 class="modal-title">{{ text_login }}</h5>
+                        <button type="button"
+                                class="close" data-dismiss="modal" aria-label="Close">
+                            <svg class="inline-svg-icon"
+                                width="20"
+                                height="20">
+                                <use xlink:href="/image/svg/sprites.svg#close"></use>
+                            </svg>
+                        </button>
+                        <div class="modal-body">
+                            <form action="index.php?route=account/login/login"
+                                method="POST"
+                                class="form"
+                                id="form-login"
+                                novalidate>
+                                <div class="alert alert-danger" id="login-alert" style="display: none;"></div>
+                                <div class="form-group">
+                                    <input type="email"
+                                           placeholder="{{ text_email }}"
+                                           class="form-control"
+                                           name="email"
+                                           required>
+                                </div>
+                                <div class="form-group form-group_password">
+                                    <input type="password"
+                                           placeholder="{{ text_password }}"
+                                           name="password"
+                                           class="form-control"
+                                           required>
+                                    <button type="button" class="form-group__icon js-show-password">
+                                        <svg class="inline-svg-icon"
+                                            width="14"
+                                            height="10">
+                                            <use xlink:href="/image/svg/sprites.svg#eye"></use>
+                                        </svg>
+                                    </button>
+                                </div>
+                                <button type="submit" class="btn btn-primary">{{ text_login_action }}</button>
+                                <div class="form__footer">
+                                    <a href="{{ forgotten }}">{{ text_forgotten }}</a>
+                                    <span>/</span>
+                                    <a href="{{ register }}">{{ text_register }}</a>
+                                </div>
+                            </form>
+                            <script>
+                                $(document).ready(function(){
+                                    $('#form-login').on('submit', function(ev){
+                                        ev.preventDefault();
+                                        var action = $(this).attr('action');
+
+                                        $.ajax({
+                                            url: action,
+                                            method: 'POST',
+                                            data: $(this).serialize(),
+                                            success: function(json){
+                                                if(json.error && json.error.warning){
+                                                    $('#login-alert').show()
+                                                                     .text(json.error.warning);
+                                                }
+                                                if(json.redirect){
+                                                     window.location.href = json.redirect;
+                                                }
+                                            }
+                                        })
+                                    })
+                                })
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+  	<header>
+		<div class="container-md">
+			<div class="logo">
+				<a href="{{ home }}"><img src="/image/svg/logo.svg" alt=""></a>
+			</div>
+			<div class="header-center">
+				{{ menu }}
+				{{ search }}
+			</div>
+			{{ language }}
+			<div class="header-nav">
+				{% if logged %}
+					<a href="{{ account }}">
+						<img src="/image/svg/user.svg" alt="">
+					</a>
+				{% else %}
+					<a data-toggle="modal" data-target="#modal-login">
+						<img src="/image/svg/user.svg" alt="">
+					</a>
+				{% endif %}
+                <div id="wishlist-total">
+                    <a href="{{ wishlist }}" class="badge-wrap">
+                        <span class="badge-content">{{ wishlist_count }}</span>
+                        <img src="/image/svg/favorite.svg" alt="{{ text_wishlist }}">
+                    </a>
+                </div>
+                <div id="cart">
+                    <a href="{{ shopping_cart }}" class="badge-wrap">
+                        <span class="badge-content">{{ cart_count }}</span>
+                        <img src="/image/svg/checkout.svg" alt="">
+                    </a>
+                </div>
+			</div>
+			<div class="header-mob-trigger">
+				<div class="one"></div>
+				<div class="two"></div>
+			</div>
+		</div>
+		{{ mobile_menu }}
+	</header>

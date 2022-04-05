@@ -1,0 +1,26 @@
+<footer>
+  <div class="container">
+    {{ subscribe }}
+    {% if informations %}
+    <ul>
+      {% for information in informations %}
+        <li><a href="{{ information.href }}">{{ information.title }}</a></li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+  </div>
+  <div class="container-full">
+    <div class="container-md">
+      <p>Все права защищены  © 2020 Allegria.com</p>
+      <p>Дизайн и разработка:</p>
+    </div>
+  </div>
+</footer>
+{% for script in scripts %}
+<script src="{{ script }}" type="text/javascript"></script>
+{% endfor %}
+<!--
+OpenCart is open source software and you are free to remove the powered by OpenCart if you want, but its generally accepted practise to make a small donation.
+Please donate via PayPal to donate@opencart.com
+//-->
+</body></html>
